@@ -1,3 +1,4 @@
+import 'package:arq_app/app/components/custom_bottom_app_bar_component.dart';
 import 'package:arq_app/app/components/custom_switch_widget.dart';
 import 'package:arq_app/app/components/product_card_component.dart';
 import 'package:arq_app/providers/categorias_providers.dart';
@@ -19,6 +20,7 @@ class ProductsListView extends ConsumerWidget {
     final productState = ref.watch(productsByCategoryProvider(nomeCategoria));
 
     return Scaffold(
+      bottomNavigationBar: CustomBottomAppBar(),
       appBar: AppBar(
         title: Text(
           titulo,

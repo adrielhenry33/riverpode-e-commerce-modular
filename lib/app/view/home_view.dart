@@ -1,3 +1,4 @@
+import 'package:arq_app/app/components/custom_bottom_app_bar_component.dart';
 import 'package:arq_app/app/components/custom_card_component.dart';
 import 'package:arq_app/app/viewmodels/home_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -30,70 +31,7 @@ class _HomeViewState extends State<HomeView> {
 
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: BottomAppBar(
-          color: Colors.white,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.grey[100],
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.home_outlined,
-                    fill: 0,
-                    color: Colors.deepPurpleAccent,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.shopping_cart_checkout_outlined,
-                    color: Colors.deepPurpleAccent,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    CupertinoIcons.compass,
-                    fill: 0,
-                    color: Colors.deepPurpleAccent,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () => Modular.to.pushNamed('/profile'),
-                  child: Container(
-                    width: 120,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Colors.deepPurple,
-                    ),
-
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.person, color: Colors.white),
-                        SizedBox(width: 5),
-                        Text(
-                          'Perfil',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        bottomNavigationBar: CustomBottomAppBar(),
         body: Stack(
           children: [
             Positioned(
