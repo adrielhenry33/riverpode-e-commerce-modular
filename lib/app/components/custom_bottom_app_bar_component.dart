@@ -49,7 +49,7 @@ class CustomBottomAppBar extends StatelessWidget {
               icon: Icon(
                 CupertinoIcons.compass,
                 fill: 0,
-                color: Colors.deepPurpleAccent[400],
+                color: Colors.deepPurpleAccent,
               ),
             ),
             GestureDetector(

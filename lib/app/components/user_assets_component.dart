@@ -18,7 +18,7 @@ class UserAssetsComponent extends StatelessWidget {
       onTap: () {},
       child: Row(
         children: [
-          Icon(icon, color: Colors.deepPurpleAccent[400], size: 30),
+          Icon(icon, color: Colors.deepPurpleAccent, size: 30),
           SizedBox(width: 50),
           Text(texto, style: TextStyle(color: Colors.black, fontSize: 20)),
          

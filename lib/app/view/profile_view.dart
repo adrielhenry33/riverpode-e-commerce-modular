@@ -22,7 +22,7 @@ class _ProfileView extends ConsumerState<ProfileView> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurpleAccent[400],
+        backgroundColor: Colors.deepPurpleAccent,
         title: Text('Perfil', style: TextStyle(color: Colors.white)),
         centerTitle: true,
       ),
@@ -46,7 +46,7 @@ class _ProfileView extends ConsumerState<ProfileView> {
                         child: Center(
                           child: Icon(
                             Icons.person,
-                            color: Colors.deepPurpleAccent[400],
+                            color: Colors.deepPurpleAccent,
                             size: 30,
                           ),
                         ),
@@ -65,7 +65,7 @@ class _ProfileView extends ConsumerState<ProfileView> {
                             width: 35,
                             height: 35,
                             decoration: BoxDecoration(
-                              color: Colors.deepPurple,
+                              color: Colors.deepPurpleAccent,
                               shape: BoxShape.circle,
                               border: Border.all(width: 3, color: Colors.white),
                             ),
