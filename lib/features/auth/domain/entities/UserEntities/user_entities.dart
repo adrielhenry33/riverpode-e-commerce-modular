@@ -1,29 +1,27 @@
-import 'package:share_plus/share_plus.dart';
-
-class UserModel {
+class UserEntities {
   final String? name;
   final String? email;
   final String? nickName;
-  final XFile? picture;
+  final String? picture;
 
-  UserModel({
+  UserEntities({
     required this.name,
     required this.email,
     required this.nickName,
     required this.picture,
   });
 
-  UserModel copyWith({
+  UserEntities copyWith({
     String? name,
     String? email,
     String? nickName,
-    XFile? picture,
+    String? picture,
   }) {
-    return UserModel(
+    return UserEntities(
       name: name ?? this.name,
       email: email ?? this.email,
       nickName: nickName ?? this.nickName,
-      picture: picture ?? XFile(this.picture!.path),
+      picture: picture ?? this.picture,
     );
   }
 }
