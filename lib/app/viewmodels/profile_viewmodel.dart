@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:arq_app/app/models/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 

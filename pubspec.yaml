@@ -45,6 +45,8 @@ dependencies:
   google_cloud_translation: ^0.0.4
   image_picker: ^1.2.1
   equatable: ^2.0.8
+  resilient_client_api: 
+    path: ./packages/resilient_api_client_package
 
 
 dev_dependencies:
