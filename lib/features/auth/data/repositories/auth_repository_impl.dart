@@ -73,11 +73,23 @@ class AuthRepositoryImpl implements IAuthRepository {
   @override
   Future<void> delete() async {
     try {
+      final user = _firebaseAuth.currentUser;
+
+      if (user == null) {
+        throw Exception('Nenhum usuário logado para realizar a exclusão.');
+      }
+
       await _firebaseAuth.currentUser?.delete();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'requires-recent-login') {
+        throw Exception(
+          'Por segurança, saia e entre novamente no app antes de excluir sua conta.',
+        );
+      }
+      throw Exception(e.message ?? 'Erro ao excluir conta.');
     } catch (e) {
-      throw Exception('Erro ao excluir a conta. Tente logar novamente');
+      throw Exception('Erro inesperado ao excluir conta.');
     }
-    
   }
 
   @override
