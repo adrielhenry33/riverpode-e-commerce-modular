@@ -36,3 +36,11 @@ class AuthError extends AuthStates {
   @override
   List<Object?> get props => [errorMessage];
 }
+
+class AuthResetPasswordSucces extends AuthStates {
+  final String emailSendTo;
+  
+  AuthResetPasswordSucces(this.emailSendTo);
+  @override
+  List<Object?> get props => [emailSendTo];
+}
