@@ -2,7 +2,7 @@
 import 'package:arq_app/features/auth/domain/entities/user_entities/user_entities.dart';
 
 class UserModel extends UserEntities {
-  UserModel({
+  const UserModel({
     required super.name,
     required super.email,
     required super.nickName,
