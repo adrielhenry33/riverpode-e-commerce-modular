@@ -1,11 +1,13 @@
 import '../repository/auth_repository.dart';
 
 class DeleteAccountUsecase {
-  final IAuthRepository repository;
+  final IAuthRepository _authRepository;
 
-  DeleteAccountUsecase(this.repository);
+  DeleteAccountUsecase({required IAuthRepository authRepository})
+    : _authRepository = authRepository;
 
+    
   Future<void> call() async {
-    return await repository.delete();
+    return await _authRepository.delete();
   }
 }

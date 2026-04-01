@@ -5,7 +5,7 @@ class LoginUsecase {
   final IAuthRepository _authRepository;
   LoginUsecase({required IAuthRepository authRepository})
     : _authRepository = authRepository;
-
+    
   Future<UserEntities> call(String email, String password) async {
     if (!email.contains('@') || email.isEmpty) {
       throw Exception('Formato de e-mail invalido');

@@ -25,12 +25,13 @@ final registerUsecaseProvider = Provider(
   (ref) => RegisterUsecase(authRepository: ref.watch(authRepositoryProvider)),
 );
 final deleteAccountUsecaseProvider = Provider(
-  (ref) => DeleteAccountUsecase(ref.watch(authRepositoryProvider)),
+  (ref) =>
+      DeleteAccountUsecase(authRepository: ref.watch(authRepositoryProvider)),
 );
 final resetPasswordUsecaseProvider = Provider(
-  (ref) => ResetPasswordUsecase(ref.watch(authRepositoryProvider)),
+  (ref) =>
+      ResetPasswordUsecase(authRepository: ref.watch(authRepositoryProvider)),
 );
-
 
 final authNotifierProvider = StateNotifierProvider<AuthNotifier, AuthStates>((
   ref,
