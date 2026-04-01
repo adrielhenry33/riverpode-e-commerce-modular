@@ -47,6 +47,7 @@ dependencies:
   equatable: ^2.0.8
   resilient_client_api: 
     path: ./packages/resilient_api_client_package
+  go_router: ^17.1.0
 
 
 dev_dependencies:

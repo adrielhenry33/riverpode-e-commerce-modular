@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:arq_app/app/components/texto_form_component.dart';
-import 'package:arq_app/app/viewmodels/login_viewmodel.dart';
+import 'package:arq_app/features/auth/presentation/providers/auth_providers.dart';
+import 'package:arq_app/features/auth/presentation/states/auth_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});
@@ -26,8 +27,51 @@ class _LoginViewState extends ConsumerState<LoginView> {
     super.dispose();
   }
 
+  void _showErrorDialog(BuildContext context, String message) {
+    if (Platform.isAndroid) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Erro ao Logar'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      showCupertinoDialog(
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+          title: const Text('Erro ao Logar'),
+          content: Text(message),
+          actions: [
+            CupertinoDialogAction(
+              child: const Text('OK'),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    ref.listen<AuthStates>(authNotifierProvider, (previous, next) {
+      if (next is AuthSuccess) {
+        context.go('/home');
+      } else if (next is AuthError) {
+        _showErrorDialog(context, next.errorMessage);
+      }
+    });
+
+    // 2. Assiste o estado para reagir na UI (Loading/Botão)
+    final state = ref.watch(authNotifierProvider);
+
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final isDarkMode = theme.brightness == Brightness.dark;
@@ -36,32 +80,28 @@ class _LoginViewState extends ConsumerState<LoginView> {
         ? 'images/login_dark.png'
         : 'images/login_light.png';
 
-    final login = ref.watch(loginProvider);
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: colors.surface,
         body: Center(
           child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Form(
               key: _key,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // Logo e Título
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       Icon(
                         Icons.shopping_cart,
                         size: 50,
                         color: Colors.deepOrangeAccent,
-                        fill: 1.0,
                       ),
-
                       SizedBox(width: 8),
-
                       Text(
                         'FakeStore',
                         style: TextStyle(
@@ -71,10 +111,11 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Image(image: AssetImage(loginImage)),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
+                  // Campo de Email
                   TextoFormComponent(
                     controller: emailController,
                     labelText: 'email',
@@ -89,8 +130,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     needIcon: false,
                   ),
 
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
 
+                  // Campo de Senha
                   TextoFormComponent(
                     controller: senhaController,
                     labelText: 'password',
@@ -105,15 +147,14 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     needIcon: true,
                   ),
 
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
 
+                  // Esqueci minha senha
                   GestureDetector(
-                    onTap: () {
-                      Modular.to.pushNamed('/recover');
-                    },
+                    onTap: () => context.push('/recover'),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
+                      children: const [
                         Text(
                           'Esqueceu sua senha? ',
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -122,82 +163,53 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     ),
                   ),
 
-                  SizedBox(height: 5),
+                  const SizedBox(height: 15),
 
+                  // Botão de Login Reativo
                   ElevatedButton(
-                    onPressed: () async {
-                      if (_key.currentState!.validate()) {
-                        final response = await login.logUser(
-                          emailController.text.trim(),
-                          senhaController.text.trim(),
-                        );
-                        if (response) {
-                          Modular.to.pushReplacementNamed('/home');
-                        } else {
-                          if (context.mounted) {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                if (Platform.isAndroid) {
-                                  return AlertDialog(
-                                    title: Text('Erro ao Logar'),
-                                    content: Text(
-                                      'Email ou Senha incorretos, tente novamente ${login.errorMessage}',
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text('OK'),
-                                      ),
-                                    ],
+                    onPressed: state is AuthLoading
+                        ? null // Desabilita o clique enquanto carrega
+                        : () {
+                            if (_key.currentState!.validate()) {
+                              ref
+                                  .read(authNotifierProvider.notifier)
+                                  .login(
+                                    emailController.text.trim(),
+                                    senhaController.text.trim(),
                                   );
-                                } else {
-                                  return CupertinoAlertDialog(
-                                    title: Text('Erro ao Logar'),
-                                    content: Text(login.errorMessage),
-                                    actions: [
-                                      CupertinoDialogAction(
-                                        isDefaultAction: true,
-                                        child: Text('OK'),
-                                        onPressed: () => Navigator.pop(context),
-                                      ),
-                                    ],
-                                  );
-                                }
-                              },
-                            );
-                          }
-                        }
-                      }
-                    },
+                            }
+                          },
                     style: ElevatedButton.styleFrom(
                       elevation: 2,
                       backgroundColor: Colors.deepOrangeAccent,
-                      padding: EdgeInsets.all(16),
-                      textStyle: TextStyle(color: Colors.white),
-                      minimumSize: Size.fromHeight(55),
-
+                      padding: const EdgeInsets.all(16),
+                      minimumSize: const Size.fromHeight(55),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadiusGeometry.circular(12),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: Text(
-                      'Login',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
+                    child: state is AuthLoading
+                        ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 2,
+                            ),
+                          )
+                        : const Text(
+                            'Login',
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
                   ),
 
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
 
                   GestureDetector(
-                    onTap: () {
-                      Modular.to.pushNamed('/register');
-                    },
+                    onTap: () => context.push('/register'),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Text('Ainda não é membro?'),
                         SizedBox(width: 5),
                         Text(

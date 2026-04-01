@@ -2,7 +2,7 @@ import 'package:arq_app/app/models/product_model.dart';
 import 'package:arq_app/app/view/carrinho_view.dart';
 import 'package:arq_app/app/view/details_view.dart';
 import 'package:arq_app/app/view/home_view.dart';
-import 'package:arq_app/app/view/login_view.dart';
+import 'package:arq_app/features/auth/presentation/views/login_view.dart';
 import 'package:arq_app/app/view/products_list_view.dart';
 import 'package:arq_app/app/view/profile_view.dart';
 import 'package:arq_app/app/view/recover_view.dart';
