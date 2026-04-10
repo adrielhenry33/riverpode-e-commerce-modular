@@ -1,7 +1,7 @@
-import 'package:arq_app/app/models/product_model.dart';
+import 'package:arq_app/features/products/domain/entities/product_entity.dart';
 
 class CartProductModel {
-  final ProductModel produto;
+  final ProductEntity produto;
   final int quantidade;
 
   CartProductModel({required this.produto, required this.quantidade});

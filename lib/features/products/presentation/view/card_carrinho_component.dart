@@ -1,7 +1,7 @@
-import 'package:arq_app/app/models/cart_product_model.dart';
+import 'package:arq_app/features/cart/data/models/cart_model.dart';
+import 'package:arq_app/features/cart/presentation/viewmodel/cart_product_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:arq_app/app/viewmodels/cart_product_viewmodel.dart';
 
 class CartItemWidget extends ConsumerWidget {
   final CartProductModel item;

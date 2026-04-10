@@ -1,8 +1,8 @@
-import 'package:arq_app/features/products/presentation/view/pop_up_component.dart';
-import 'package:arq_app/app/models/cart_product_model.dart';
-import 'package:arq_app/app/viewmodels/cart_product_viewmodel.dart';
+import 'package:arq_app/features/cart/data/models/cart_model.dart';
+import 'package:arq_app/features/cart/presentation/viewmodel/cart_product_viewmodel.dart';
 import 'package:arq_app/features/products/domain/entities/product_entity.dart'; // IMPORTANTE: Usar Entity
 import 'package:arq_app/features/products/presentation/providers/product_providers.dart';
+import 'package:arq_app/features/products/presentation/view/pop_up_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart'; // Trocamos Modular por GoRouter

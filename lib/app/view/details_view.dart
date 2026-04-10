@@ -1,10 +1,9 @@
-import 'package:arq_app/features/auth/presentation/views/cep_calculator_component.dart';
-import 'package:arq_app/features/products/presentation/view/pop_up_component.dart';
 import 'package:arq_app/components/review_component.dart';
-import 'package:arq_app/app/models/cart_product_model.dart';
-import 'package:arq_app/app/viewmodels/cart_product_viewmodel.dart';
-import 'package:arq_app/features/products/data/models/product_model.dart';
+import 'package:arq_app/features/auth/presentation/views/cep_calculator_component.dart';
+import 'package:arq_app/features/cart/data/models/cart_model.dart';
+import 'package:arq_app/features/cart/presentation/viewmodel/cart_product_viewmodel.dart';
 import 'package:arq_app/features/products/domain/entities/product_entity.dart';
+import 'package:arq_app/features/products/presentation/view/pop_up_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
