@@ -1,4 +1,4 @@
-import 'package:arq_app/app/Services/client_http_service.dart';
+import 'package:arq_app/app/Services/resilient_client_adapter.dart';
 import 'package:arq_app/app/models/cep_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

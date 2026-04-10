@@ -1,10 +1,10 @@
-import 'package:arq_app/app/Services/client_http_service.dart';
+import 'package:arq_app/app/interfaces/client_http_interface.dart';
 import 'package:arq_app/features/products/data/models/product_model.dart';
 import 'package:arq_app/features/products/domain/entities/product_entity.dart';
 import 'package:arq_app/features/products/domain/repository/i_product_repository.dart';
 
 class ProductByCategoryImpl extends IProductRepository {
-  final ClientHttpServiceImplementation _client;
+  final ClientHttpInterface _client;
   ProductByCategoryImpl(this._client);
 
   @override

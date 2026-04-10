@@ -16,7 +16,7 @@ class SharedLocalStorageServiceImplementation implements LocalStorageInterface {
 
   @override
   Future put(String key, value) async {
-    var shared = await SharedPreferences.getInstance();
+    var shared = await SharedPreferences.getInstace();
     if (value is bool) {
       shared.setBool(key, value);
     } else if (value is String) {

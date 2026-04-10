@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:arq_app/app/interfaces/client_http_interface.dart';
 import 'package:http/http.dart' as http;
 
-class ClientHttpServiceImplementation implements ClientHttpInterface {
+class ResilientClientAdapter implements ClientHttpInterface {
   final http.Client httpClient = http.Client();
 
   @override
