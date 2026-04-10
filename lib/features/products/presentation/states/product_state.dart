@@ -2,7 +2,7 @@ import 'package:arq_app/features/products/domain/entities/product_entity.dart';
 
 abstract class ProductState {}
 
-class ProudctInitial extends ProductState {}
+class ProductInitial extends ProductState {}
 
 class ProductLoading extends ProductState {}
 

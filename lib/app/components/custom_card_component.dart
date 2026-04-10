@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomCardComponent extends StatelessWidget {
   final String urlImagemFundo;
@@ -33,10 +33,7 @@ class CustomCardComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Modular.to.pushNamed(
-          '/produtos',
-          arguments: {'categoria': nomeCategoria, 'titulo': titulo},
-        );
+        context.push('/products-list/$nomeCategoria/$titulo');
       },
       child: Container(
         decoration: BoxDecoration(

@@ -6,9 +6,9 @@ class ProductNotifierViewModel extends StateNotifier<ProductState> {
   final GeteletronicsUsecase _geteletronicsUsecase;
 
   ProductNotifierViewModel(this._geteletronicsUsecase)
-    : super(ProudctInitial());
+    : super(ProductInitial());
 
-  Future<void> getProductsByCategory({String categoria = ''}) async {
+  Future<void> loadProducts({String categoria = ''}) async {
     try {
       state = ProductLoading();
 

@@ -24,5 +24,8 @@ final getElectronicsUseCaseProvider = Provider<GeteletronicsUsecase>((ref) {
 final productNotifierProvider =
     StateNotifierProvider<ProductNotifierViewModel, ProductState>((ref) {
       final useCase = ref.watch(getElectronicsUseCaseProvider);
+      final notifier = ProductNotifierViewModel(useCase);
+
+      Future.microtask(()=> notifier.loadProducts());
       return ProductNotifierViewModel(useCase);
     });
