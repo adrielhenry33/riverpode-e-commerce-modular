@@ -1,6 +1,6 @@
-import 'package:arq_app/app/view/carrinho_view.dart';
+import 'package:arq_app/features/cart/presentation/view/carrinho_view.dart';
 import 'package:arq_app/app/view/details_view.dart';
-import 'package:arq_app/app/view/home_view.dart';
+import 'package:arq_app/features/home/views/home_view.dart';
 import 'package:arq_app/features/auth/presentation/views/login_view.dart';
 import 'package:arq_app/features/products/domain/entities/product_entity.dart';
 import 'package:arq_app/features/products/presentation/view/products_list_view.dart';

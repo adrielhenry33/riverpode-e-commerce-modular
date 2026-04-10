@@ -1,6 +1,6 @@
 import 'package:arq_app/app/routes/app_routes_names.dart';
 import 'package:arq_app/app/view/details_view.dart';
-import 'package:arq_app/app/view/home_view.dart';
+import 'package:arq_app/features/home/views/home_view.dart';
 // Importações de rotas e providers
 import 'package:arq_app/features/auth/presentation/providers/auth_providers.dart';
 import 'package:arq_app/features/auth/presentation/states/auth_states.dart';
