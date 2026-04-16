@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ProductsListView extends ConsumerWidget {
   final String titulo;
 
-  const ProductsListView({super.key, required this.titulo});
+  const ProductsListView({super.key, required this.titulo, required nomeCategoria});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

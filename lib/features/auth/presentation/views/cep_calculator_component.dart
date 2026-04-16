@@ -1,4 +1,4 @@
-import 'package:arq_app/app/Repository/cep_repository.dart';
+import 'package:arq_app/features/auth/domain/repository/cep_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -1,11 +1,12 @@
-import 'package:arq_app/app/Services/resilient_client_adapter.dart';
-import 'package:arq_app/app/models/cep_model.dart';
+import 'package:arq_app/app/interfaces/client_http_interface.dart';
+import 'package:arq_app/features/auth/data/models/cep_model.dart';
+import 'package:arq_app/features/products/presentation/providers/product_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CepRepository {
-  final ClientHttpServiceImplementation _http;
+  final ClientHttpInterface _http;
 
-  CepRepository({required ClientHttpServiceImplementation http}) : _http = http;
+  CepRepository({required ClientHttpInterface http}) : _http = http;
 
   Future<CepModel> getAdress(String cep) async {
     try {
@@ -26,7 +27,8 @@ class CepRepository {
 }
 
 final cepRepositoryProvider = Provider<CepRepository>((ref) {
-  return CepRepository(http: ClientHttpServiceImplementation());
+  final http = ref.watch(clientHttpProvider);
+  return CepRepository(http: http);
 });
 
 final enderecoProvider = StateProvider<CepModel?>((ref) => null);

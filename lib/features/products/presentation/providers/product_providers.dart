@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:arq_app/app/Services/resilient_client_adapter.dart';
+import 'package:arq_app/app/infraestructure/adapters/resilient_client_adapter.dart';
 import 'package:arq_app/app/interfaces/client_http_interface.dart';
 import 'package:arq_app/features/products/data/repository/product_by_category_impl.dart';
 import 'package:arq_app/features/products/domain/entities/product_entity.dart';

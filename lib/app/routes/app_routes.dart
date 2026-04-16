@@ -1,11 +1,10 @@
 import 'package:arq_app/app/routes/app_routes_names.dart';
-import 'package:arq_app/app/view/details_view.dart';
-import 'package:arq_app/features/home/views/home_view.dart';
-// Importações de rotas e providers
 import 'package:arq_app/features/auth/presentation/providers/auth_providers.dart';
 import 'package:arq_app/features/auth/presentation/states/auth_states.dart';
 import 'package:arq_app/features/auth/presentation/views/login_view.dart';
+import 'package:arq_app/features/home/views/home_view.dart';
 import 'package:arq_app/features/products/domain/entities/product_entity.dart';
+import 'package:arq_app/features/products/presentation/view/product_details_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -41,7 +40,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: AppRoutesNames.detailProduct,
         builder: (context, state) {
           final produto = state.extra as ProductEntity;
-          return DetailsView(produto: produto);
+          return ProductDetailsView(produto: produto);
         },
       ),
     ],

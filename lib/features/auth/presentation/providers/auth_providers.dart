@@ -10,6 +10,8 @@ import 'package:arq_app/features/auth/presentation/viewmodels/auth_notifier.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../viewmodels/registration_view_model.dart';
+
 final authRepositoryProvider = Provider<IAuthRepository>(
   (ref) => AuthRepositoryImpl(FirebaseAuth.instance),
 );
@@ -44,3 +46,8 @@ final authNotifierProvider = StateNotifierProvider<AuthNotifier, AuthStates>((
     ref.watch(resetPasswordUsecaseProvider),
   );
 });
+
+final registrationProvider =
+    StateNotifierProvider.autoDispose<RegistrationNotifier, AuthStates>((ref) {
+      return RegistrationNotifier();
+    });

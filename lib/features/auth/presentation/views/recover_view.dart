@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:arq_app/components/texto_form_component.dart';
-import 'package:arq_app/app/viewmodels/recover_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -14,14 +13,9 @@ class RecoverView extends StatefulWidget {
 }
 
 class _RecoverViewState extends State<RecoverView> {
-  final viewmodel = Modular.get<RecoverViewmodel>();
   final _key = GlobalKey<FormState>();
 
-  @override
-  void dispose() {
-    viewmodel.controller.dispose();
-    super.dispose();
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
