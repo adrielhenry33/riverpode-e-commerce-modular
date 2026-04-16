@@ -1,24 +1,28 @@
 import 'dart:io';
 
 import 'package:arq_app/components/texto_form_component.dart';
+import 'package:arq_app/features/auth/presentation/providers/auth_providers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RecoverView extends StatefulWidget {
+class RecoverView extends ConsumerStatefulWidget {
   const RecoverView({super.key});
 
   @override
-  State<RecoverView> createState() => _RecoverViewState();
+  ConsumerState<RecoverView> createState() => _RecoverViewState();
 }
 
-class _RecoverViewState extends State<RecoverView> {
+class _RecoverViewState extends ConsumerState<RecoverView> {
   final _key = GlobalKey<FormState>();
-
- 
+  final emailController = TextEditingController();
+  final senhaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final notifier = ref.watch(authNotifierProvider.notifier);
+
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -35,7 +39,7 @@ class _RecoverViewState extends State<RecoverView> {
                   ),
                   SizedBox(height: 15),
                   TextoFormComponent(
-                    controller: viewmodel.controller,
+                    controller: emailController,
                     labelText: 'email',
                     icone: Icons.email_outlined,
                     validator: (value) {
@@ -69,44 +73,43 @@ class _RecoverViewState extends State<RecoverView> {
                     child: MaterialButton(
                       onPressed: () async {
                         if (_key.currentState!.validate()) {
-                          final result = await viewmodel.resetPassword();
-                          if (!result) {
-                            if (context.mounted) {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  if (Platform.isAndroid) {
-                                    return AlertDialog(
-                                      title: Text('Usuario não cadastrado'),
-                                      content: Text(
-                                        'Email  incorreto, tente novamente ${viewmodel.exceptionMessage}',
+                          await notifier.resetPasswordUsecase(
+                            emailController.text.trim(),
+                          );
+                          if (context.mounted) {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                if (Platform.isAndroid) {
+                                  return AlertDialog(
+                                    title: Text('Usuario não cadastrado'),
+                                    content: Text(
+                                      'Email  incorreto, tente novamente ',
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('OK'),
                                       ),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: Text('OK'),
-                                        ),
-                                      ],
-                                    );
-                                  } else {
-                                    return CupertinoAlertDialog(
-                                      title: Text('Usuario não cadastrado'),
-                                      content: Text(viewmodel.exceptionMessage),
-                                      actions: [
-                                        CupertinoDialogAction(
-                                          isDefaultAction: true,
-                                          child: Text('OK'),
-                                          onPressed: () =>
-                                              Navigator.pop(context),
-                                        ),
-                                      ],
-                                    );
-                                  }
-                                },
-                              );
-                            }
+                                    ],
+                                  );
+                                } else {
+                                  return CupertinoAlertDialog(
+                                    title: Text('Usuario não cadastrado'),
+                                    content: Text('Favor cadastrar um usuario'),
+                                    actions: [
+                                      CupertinoDialogAction(
+                                        isDefaultAction: true,
+                                        child: Text('OK'),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                    ],
+                                  );
+                                }
+                              },
+                            );
                           } else {
                             Modular.to.pushReplacementNamed('/');
                           }
